@@ -22,13 +22,13 @@ class BankAccount(models.Model):
                                       verbose_name="Account number")
 
     def __str__(self):
-        pass
+        return self.account_type
 
     class Meta:
         db_table = ''
         managed = True
-        verbose_name = 'Bank_Account'
-        verbose_name_plural = 'Bank_Accounts'
+        verbose_name = 'Bank account'
+        verbose_name_plural = 'Bank accounts'
 
 
 class CreditCard(models.Model):
@@ -45,10 +45,10 @@ class CreditCard(models.Model):
     billing_address = models.CharField(max_length=1520)
 
     def __str__(self):
-        pass
+        return self.card_type
 
     class Meta:
         db_table = ''
         managed = True
-        verbose_name = 'Credit_Card'
-        verbose_name_plural = 'Credit_Cards'
+        verbose_name = 'Credit card'
+        verbose_name_plural = 'Credit cards'
