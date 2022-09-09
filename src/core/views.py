@@ -1,12 +1,18 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import BankAccountSerializer, CreditCardSerializer
 from .models import BankAccount, CreditCard
 
 class BankAccountView(APIView):
+
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         bankQs = BankAccount.objects.all()
 
@@ -24,6 +30,10 @@ class BankAccountView(APIView):
         return Response(bank_serializer.errors)
 
 class CreditCardView(APIView):
+
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         creditQs = CreditCard.objects.all()
         serializer2 = CreditCardSerializer(creditQs, many=True)
